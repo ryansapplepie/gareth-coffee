@@ -1,0 +1,204 @@
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Nunito:300);
+/*
+@font-face{
+ font-family: jaldi;
+ src: url(fonts/jaldiRegular.ttf) format('truetype');
+}
+*/
+html{
+ background-color: #f2f2f2;
+}
+
+footer{
+ margin-top: 50px;
+ height: 50px;
+ border-top-width: 1px;
+ border-top-style: solid;
+ border-top-color: #999999;
+ background-color: #e6e6e6;
+}
+
+#footerText{
+ font-family: 'Nunito', sans-serif;
+ margin-left: 50px;
+ display: inline-block;
+}
+
+
+.topHeader{
+ display: inline-block;
+}
+
+#confirmOrderDiv{
+ display: inline-block;
+ padding: 10px;
+ border-radius: 10px;
+ border-width: 15px;
+ border-style: solid;
+
+ /*position: absolute;
+ left: 685px;
+ top: 150px;*/
+ background-color: #e3e3e3;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+#nextButton{
+ background-color: #e9ece5;
+ border: none;
+ color: #3b3a36;
+ padding: 15px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 16px;
+ width: 10%;
+ border-radius: 10px;
+
+ position: absolute;
+ top: 645px;
+ left: 900px;
+
+}
+
+#nextButton:hover {
+ color: red;
+ -webkit-transition-duration: 0.4s; 
+ transition-duration: 0.4s;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#nameInput{
+ border-radius: 10px;
+ width: 70%;
+ height: 5%;
+ padding: 12px 20px;
+ background-color: #c0dfd9;
+ color: white;
+ border: none;
+ position: absolute;
+ top: 650px;
+ left: 160px;
+}
+
+#nameInput:hover{
+ -webkit-transition-duration: 0.4s; 
+ transition-duration: 0.4s;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.quantityElement{
+ width: 6%;
+ height: 3%;
+ padding: 12px 20px;
+ background-color: #b3c2bf;
+ color: white;
+ border: none;
+ border-radius: 10px;
+}
+
+li{
+ margin-left: 0; 
+ list-style-type: none;
+ border-style: solid;
+ border-color: gray;
+ border-width: 1.5px;
+ height: 50px;
+ font-size: 40px;
+ font-family: sans-serif;
+ width: 50%;
+ padding-left: 200px;
+ border-bottom-width: 1px;
+}
+
+/*
+li:hover{
+ color: #d9d9d9 !important;
+ background-color:#595959 !important;
+}
+*/
+ul{
+ list-style-type: none;
+ margin:0;
+ padding:0;
+ overflow: hidden;
+
+}
+
+#coffeeTypeList{
+ display: inline;
+}
+
+h1{
+ font-family: 'Open Sans', sans-serif;
+ color: #727272;
+
+}
+
+.orderElementButton{
+ background-color: #e9ece5;
+ border: none;
+ color: #3b3a36;
+ padding: 15px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 16px;
+ border-style: solid;
+ border-width: 1px;
+ border-color: #727272;
+ /*width: 100%;
+ border-radius: 10px;
+ */
+}
+
+.orderElementButton:hover{
+ -webkit-transition-duration: 0.4s; 
+ transition-duration: 0.4s;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#confirmOrderButton{
+ margin-left: 10px;
+}
+
+#confirmOrderButton:hover{
+ border-color: blue;
+}
+
+#cancelOrderButton:hover{
+ border-color: red;
+}
+
+#passwordInput{
+ width: 50%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ color: #3CBC8D;
+ border: none;
+ border-bottom: 2px solid #3CBC8D;
+ background-color: #f2f2f2;
+}
+
+#passwordButton{
+ background-color: #4CAF50;
+ border: none;
+ color: white;
+ padding: 16px 32px;
+ text-decoration: none;
+ margin: 4px 2px;
+ cursor: pointer;
+ border-radius: 10px;
+}
+
+.paymentLabel{
+ font-family: 'Nunito', sans-serif;
+ color: green;
+}
+
+#paidLabel{
+ color: #ff4d4d;
+}
