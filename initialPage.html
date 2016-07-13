@@ -1,235 +1,36 @@
+<!DOCTYPE HTML>
 <html manifest="site.manifest">
 <link rel="stylesheet" type="text/css" href="style.css">
-<title>Blue Brew CCOS</title>
+<!--<link rel="manifest" href="/manifest.json">-->
 
-<img class="topHeader" src="bbLogo.png" height="100" width="100">
-<h1 class="topHeader">Blue Brew C.C.O.S</h1> 
-<br>
+<center><img src="icons/bbLogo.png" width="400" height="400px"></center>
 
-<!--<h1>Coffee Type</h1>-->
-<ol id="coffeeTypeList">
- <li id="flatWhite">Flat White</li>
- <li id="latte">Latte</li>
- <li id="mocha">Mocha</li>
- <li id="shortBlack">Short Black</li>
- <li id="longBlack">Long Black</li>
- <li id="hotChoc">Hot Choc</li>
- <li id="americano">Americano</li>
- <li id="chiLatte">Chi Latte</li>
- <li id="cappa">Cappachino</li>
- <li id="other"><input id="otherInput" type="text" maxLength="12"></li>
-</oi>
-<br>
+<center><h1>Login:</h1></center>
 
-<input id="paidInput" type="radio" name="payment" checked> <label for="payment" class="paymentLabel" id="paidLabel">Paid</label><br>
-<input type="radio" name="payment"> <label for="payment" class="paymentLabel">Complimentary</label><br>
-
-<br>
-<input id="nameInput" type="text" maxLength="13" placeholder="Enter Name:">
-<br>
-<br>
-<button id="nextButton">Next</button>
-<!--<button id="archiveButton">OPEN ORDER ARCHIVE</button>-->
-
-<script src="jquery-1.9.1.min.js"></script>
+<center><input id="passwordInput" type="password"></center>
+<center><button id="passwordButton">-></button></center>
 
 <script>
+var passwordInput = document.getElementById("passwordInput");
+var passwordButton = document.getElementById("passwordButton");
 
-//Global variables
-var nameInput = document.getElementById("nameInput");
-var nextButton = document.getElementById("nextButton"); 
-//var archiveButton = document.getElementById("archiveButton");
-//archiveButton.onclick = function(){window.open("archive.html", "_blank");};
+passwordButton.onclick = clickedButton;
 
-var coffeeLiArray = $("li").toArray();
-/*
-var currentOrdersArray = [];
-localStorage.setItem("currentOrdersArray", JSON.stringify(currentOrdersArray));
-*/
-
-for(var i = 0; i < coffeeLiArray.length; i++)
-{
-	coffeeLiArray[i].checked = false;
-
-	coffeeLiArray[i].onclick = function (){
-		selectCoffeeType(this);
-	};
-}
-
-
-function isProperNumberInput(evt){
-	if(evt.charCode >= 48 && evt.charCode <= 57)
-		return true;
-	else
-		return false;
-}
-
-function selectCoffeeType(coffeeLiElement){
-	if(!coffeeLiElement.checked)
-	{
-		coffeeLiElement.quantityElement = document.createElement("input");
-		coffeeLiElement.quantityElement.setAttribute("type", "text");
-		coffeeLiElement.quantityElement.setAttribute("class", "quantityElement");
-		coffeeLiElement.quantityElement.setAttribute("onkeypress", "return isProperNumberInput(event)");
-		coffeeLiElement.quantityElement.setAttribute("maxLength", "1");
-		coffeeLiElement.quantityElement.setAttribute("value", "1");
-		/* Similar to the other inputs:
-		The reason why these are text type inputs and not type="number" is because 
-		math symbols such as "e" are considered valid*/
-
-		coffeeLiElement.quantityElement.style.position = "absolute";
-		coffeeLiElement.quantityElement.style.left = "550px";
-		coffeeLiElement.quantityElement.style.top = $(coffeeLiElement).position().top + 14;
-		document.body.appendChild(coffeeLiElement.quantityElement);
+function clickedButton(){
+	if(passwordInput.value == "password")
+		window.open("order.html", "_self");
+	else{
+		passwordInput.value = "";
+		passwordInput.style.borderBottomColor = "red";
+		passwordButton.style.backgroundColor = "red";
+	}
 		
-		coffeeLiElement.checked = true;
-		coffeeLiElement.style.color = "#d9d9d9";
-		coffeeLiElement.style.backgroundColor = "#595959";
-	}
-	else
-	{
-		document.body.removeChild(coffeeLiElement.quantityElement);
-		coffeeLiElement.checked = false;
-		coffeeLiElement.style.color = "black";
-		coffeeLiElement.style.backgroundColor = "#f2f2f2";
-	}
-
 }
-
-//This function is called when the sizeSelector is clicked
-
-function addConfirmOrderElements(){
-	var totalCost = 0;
-
-	var confirmOrderDiv = document.createElement("div");
-	confirmOrderDiv.setAttribute("id", "confirmOrderDiv");
-
-	if(document.getElementById("paidInput").checked)
-		confirmOrderDiv.style.borderColor = "#ff4d4d";
-	else
-		confirmOrderDiv.style.borderColor = "green";
-
-	var customerHeader = document.createElement("H1");
-	customerHeader.style.marginTop = "0px";
-	customerHeader.appendChild(document.createTextNode(nameInput.value));
-	confirmOrderDiv.appendChild(customerHeader);
-
-	for(var i = 0; i < coffeeLiArray.length; i++)
-	{
-		if(coffeeLiArray[i].checked)
-		{
-			for(var a = 0; a < Number(coffeeLiArray[i].quantityElement.value); a++)
-			{
-				var orderElement = document.createElement("div");
-				orderElement.style.display = "inline-block";
-				orderElement.style.padding = "10px";
-				orderElement.style.borderRadius = "10px";
-				orderElement.style.borderStyle = "solid";
-				orderElement.style.borderWidth = "2.5px";
-				orderElement.style.fontFamily = "Nunito", "sans-serif";
-
-				if(coffeeLiArray[i].id != "other")
-					orderElement.appendChild(document.createTextNode(coffeeLiArray[i].innerHTML));
-				else
-					orderElement.appendChild(document.createTextNode(document.getElementById("otherInput").value));
-
-				alert(document.getElementById("otherInput").value);
-				orderElement.appendChild(document.createElement("br"));
-				/*
-				var priceTextNode;
-				switch(coffeeLiArray[i].innerHTML){
-					case "Flat White":
-						totalCost += 1.52;
-						priceTextNode = document.createTextNode("$1.52");
-					break;
-					case "Latte":
-						totalCost += 1.52;
-						priceTextNode = document.createTextNode("$1.52");
-					break;
-					case "Mocha":
-						totalCost += 1.46;
-						priceTextNode = document.createTextNode("$1.46");
-					break;
-					case "Short Black":
-						totalCost += 0.66;
-						priceTextNode = document.createTextNode("$0.66");
-					break;
-					case "Long Black":
-						totalCost += 1.08;
-						priceTextNode = document.createTextNode("$1.08");
-					break;
-					case "Hot Choc":
-						totalCost += 0.67;
-						priceTextNode = document.createTextNode("$0.67");
-					break;
-					case "Americano":
-						totalCost += 1.08;
-						priceTextNode = document.createTextNode("$1.08");
-					break;
-					case "Chi Latte":
-						totalCost += 0.71;
-						priceTextNode = document.createTextNode("$0.71");
-					break;
-					case "Cappachino":
-						totalCost += 1.52;
-						priceTextNode = document.createTextNode("$1.52");
-					break;
-				}
-
-				orderElement.appendChild(priceTextNode);
-				*/
-				confirmOrderDiv.appendChild(orderElement);
-
-			}
-		}
-
-	}
-
-	/*
-	var totalHeader = document.createElement("H2");
-	if(document.getElementById("paidInput").checked)
-		totalHeader.appendChild(document.createTextNode("Total: $" + totalCost.toFixed(2).toString()));
-	else
-		totalHeader.appendChild(document.createTextNode("Complimentary Order"));
-	totalHeader.style.fontFamily = "Nunito", "sans-serif";
-	confirmOrderDiv.appendChild(totalHeader);
-	*/
-	var confirmOrderButton = document.createElement("BUTTON");
-	confirmOrderButton.setAttribute("class", "orderElementButton");
-	confirmOrderButton.setAttribute("id", "confirmOrderButton");
-	confirmOrderButton.appendChild(document.createTextNode("COMPLETED"));
-	confirmOrderDiv.appendChild(confirmOrderButton);
-
-	document.body.appendChild(confirmOrderDiv);
-	confirmOrderButton.onclick = function(){finishedOrderDiv(confirmOrderDiv);};
-
-	
-}
-
-function finishedOrderDiv(confirmOrderDiv){
-	document.body.removeChild(confirmOrderDiv);
-	/*
-	var currentOrdersArray = JSON.parse(localStorage.getItem("currentOrdersArray"));
-	if(currentOrdersArray)
-		currentOrdersArray.splice(0,0,confirmOrderDiv);
-	else
-		currentOrdersArray = [confirmOrderDiv];
-	localStorage.setItem("currentOrdersArray", JSON.stringify(currentOrdersArray));
-	alert(JSON.parse(localStorage.getItem("currentOrdersArray")));
-	*/
-}
-
-nextButton.onclick = function() {
-	addConfirmOrderElements();
-	nameInput.value = "";
-	nameInput.setAttribute("placeholder", "Enter Name:");
-	document.getElementById("otherInput").value = "";
-	for(var i = 0; i < coffeeLiArray.length; i++)
-		if(coffeeLiArray[i].checked)
-			selectCoffeeType(coffeeLiArray[i]);
-
-};
-
 
 </script>
+
+
+<footer>
+ <p id="footerText">&copy;2016 - Ryan King</p>
+</footer>
 </html>
