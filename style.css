@@ -59,7 +59,7 @@ footer{
  border-radius: 10px;
 
  position: absolute;
- top: 645px;
+ top: 695px;
  left: 900px;
 
 }
@@ -80,7 +80,7 @@ footer{
  color: white;
  border: none;
  position: absolute;
- top: 650px;
+ top: 700px;
  left: 160px;
 }
 
@@ -201,4 +201,11 @@ h1{
 
 #paidLabel{
  color: #ff4d4d;
+}
+
+#otherInput{
+ width: 230px;
+ border: none;
+ background-color: #f2f2f2;
+ color: black;
 }
