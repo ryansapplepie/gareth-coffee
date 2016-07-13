@@ -17,6 +17,7 @@
  <li id="americano">Americano</li>
  <li id="chiLatte">Chi Latte</li>
  <li id="cappa">Cappachino</li>
+ <li id="other"><input id="otherInput" type="text" maxLength="12"></li>
 </oi>
 <br>
 
@@ -127,8 +128,14 @@ function addConfirmOrderElements(){
 				orderElement.style.borderWidth = "2.5px";
 				orderElement.style.fontFamily = "Nunito", "sans-serif";
 
-				orderElement.appendChild(document.createTextNode(coffeeLiArray[i].innerHTML));
+				if(coffeeLiArray[i].id != "other")
+					orderElement.appendChild(document.createTextNode(coffeeLiArray[i].innerHTML));
+				else
+					orderElement.appendChild(document.createTextNode(document.getElementById("otherInput").value));
+
+				alert(document.getElementById("otherInput").value);
 				orderElement.appendChild(document.createElement("br"));
+				/*
 				var priceTextNode;
 				switch(coffeeLiArray[i].innerHTML){
 					case "Flat White":
@@ -170,7 +177,7 @@ function addConfirmOrderElements(){
 				}
 
 				orderElement.appendChild(priceTextNode);
-
+				*/
 				confirmOrderDiv.appendChild(orderElement);
 
 			}
@@ -178,7 +185,7 @@ function addConfirmOrderElements(){
 
 	}
 
-
+	/*
 	var totalHeader = document.createElement("H2");
 	if(document.getElementById("paidInput").checked)
 		totalHeader.appendChild(document.createTextNode("Total: $" + totalCost.toFixed(2).toString()));
@@ -186,7 +193,7 @@ function addConfirmOrderElements(){
 		totalHeader.appendChild(document.createTextNode("Complimentary Order"));
 	totalHeader.style.fontFamily = "Nunito", "sans-serif";
 	confirmOrderDiv.appendChild(totalHeader);
-
+	*/
 	var confirmOrderButton = document.createElement("BUTTON");
 	confirmOrderButton.setAttribute("class", "orderElementButton");
 	confirmOrderButton.setAttribute("id", "confirmOrderButton");
@@ -216,6 +223,7 @@ nextButton.onclick = function() {
 	addConfirmOrderElements();
 	nameInput.value = "";
 	nameInput.setAttribute("placeholder", "Enter Name:");
+	document.getElementById("otherInput").value = "";
 	for(var i = 0; i < coffeeLiArray.length; i++)
 		if(coffeeLiArray[i].checked)
 			selectCoffeeType(coffeeLiArray[i]);
