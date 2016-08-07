@@ -1,8 +1,8 @@
-<html manifest="site.manifest">
+<!--<html manifest="site.manifest">-->
 <link rel="stylesheet" type="text/css" href="style.css">
 <title>Blue Brew CCOS</title>
 
-<img class="topHeader" src="bbLogo.png" height="100" width="100">
+<a href="archive.html"><img class="topHeader" src="bbLogo.png" height="100" width="100"></a>
 <h1 class="topHeader">Blue Brew C.C.O.S</h1> 
 <br>
 
@@ -99,7 +99,8 @@ function selectCoffeeType(coffeeLiElement){
 //This function is called when the sizeSelector is clicked
 
 function addConfirmOrderElements(){
-	var totalCost = 0;
+	//var totalCost = 0;
+	var tempArray = [];
 
 	var confirmOrderDiv = document.createElement("div");
 	confirmOrderDiv.setAttribute("id", "confirmOrderDiv");
@@ -129,9 +130,14 @@ function addConfirmOrderElements(){
 				orderElement.style.fontFamily = "Nunito", "sans-serif";
 
 				if(coffeeLiArray[i].id != "other")
+				{
 					orderElement.appendChild(document.createTextNode(coffeeLiArray[i].innerHTML));
-				else
+					tempArray.push(coffeeLiArray[i].innerHTML);
+				}else{
 					orderElement.appendChild(document.createTextNode(document.getElementById("otherInput").value));
+					tempArray.push(document.getElementById("otherInput").value);
+				}
+					
 
 				//alert(document.getElementById("otherInput").value);
 				orderElement.appendChild(document.createElement("br"));
@@ -201,22 +207,27 @@ function addConfirmOrderElements(){
 	confirmOrderDiv.appendChild(confirmOrderButton);
 
 	document.body.appendChild(confirmOrderDiv);
-	confirmOrderButton.onclick = function(){finishedOrderDiv(confirmOrderDiv);};
+
+	var tempBool;
+	if (document.getElementById("paidInput").checked)
+		tempBool = true;
+	else
+		tempBool = false;
+
+	var orderObject = {name:nameInput.value, beverages:tempArray, paid:tempBool};
+
+	confirmOrderButton.onclick = function(){finishedOrderDiv(confirmOrderDiv, orderObject);};
 
 	
 }
 
-function finishedOrderDiv(confirmOrderDiv){
+function finishedOrderDiv(confirmOrderDiv, order){
 	document.body.removeChild(confirmOrderDiv);
-	/*
-	var currentOrdersArray = JSON.parse(localStorage.getItem("currentOrdersArray"));
-	if(currentOrdersArray)
-		currentOrdersArray.splice(0,0,confirmOrderDiv);
-	else
-		currentOrdersArray = [confirmOrderDiv];
-	localStorage.setItem("currentOrdersArray", JSON.stringify(currentOrdersArray));
-	alert(JSON.parse(localStorage.getItem("currentOrdersArray")));
-	*/
+	
+	var oldItems = JSON.parse(localStorage.getItem("ordersArray")) || [];
+	oldItems.push(order);
+	localStorage.setItem("ordersArray", JSON.stringify(oldItems));
+	
 }
 
 nextButton.onclick = function() {

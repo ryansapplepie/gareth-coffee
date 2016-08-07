@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="manifest" href="/manifest.json">
+
+<img class="topHeader" src="bbLogo.png" height="100" width="100">
+<h1 style="display: inline-block">Archive of Orders:</h1>
+
+<button id="deleteButton">Delete Archives</button>
+
+<script>
+var orders = JSON.parse(localStorage.getItem("ordersArray")) || [];
+
+for (var i = 0; i < orders.length; i++)
+{
+	var confirmOrderDiv = document.createElement("div");
+	confirmOrderDiv.setAttribute("id", "confirmOrderDiv");
+
+	if (orders[i].paid)
+		confirmOrderDiv.style.borderColor = "#ff4d4d";
+	else
+		confirmOrderDiv.style.borderColor = "green";
+
+	var customerHeader = document.createElement("H1");
+	customerHeader.style.marginTop = "0px";
+	customerHeader.appendChild(document.createTextNode(orders[i].name));
+	confirmOrderDiv.appendChild(customerHeader);
+
+	for (var b = 0; b < orders[i].beverages.length; b++)
+	{
+		var orderElement = document.createElement("div");
+		orderElement.style.display = "inline-block";
+		orderElement.style.padding = "10px";
+		orderElement.style.borderRadius = "10px";
+		orderElement.style.borderStyle = "solid";
+		orderElement.style.borderWidth = "2.5px";
+		orderElement.style.fontFamily = "Nunito", "sans-serif";
+			
+		orderElement.appendChild(document.createTextNode(orders[i].beverages[b]));	
+		orderElement.appendChild(document.createElement("br"));
+		confirmOrderDiv.appendChild(orderElement);
+
+	}
+
+	document.body.appendChild(confirmOrderDiv);
+	
+}
+
+
+document.getElementById("deleteButton").onclick = function(){
+	var foo = [];
+	localStorage.setItem("ordersArray", JSON.stringify(foo));
+
+};
+
+
+</script>
